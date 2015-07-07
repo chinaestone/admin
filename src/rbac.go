@@ -15,6 +15,11 @@ import (
 //check access and register user's nodes
 func AccessRegister() {
 	var Check = func(ctx *context.Context) {
+		
+		if strings.Contains(ctx.Request.RequestURI, "/fileupload-server/") {
+			return
+		}
+
 		user_auth_type, _ := strconv.Atoi(beego.AppConfig.String("user_auth_type"))
 		rbac_auth_gateway := beego.AppConfig.String("rbac_auth_gateway")
 		var accesslist map[string]bool
